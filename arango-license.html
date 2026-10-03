@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eval: Local vs OpenRouter | JEV Second Brain</title>
+    <title>ArangoDB License Costs & Dashboards | JEV</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
@@ -26,7 +26,7 @@
                 <a href="index.html" class="hover:text-white text-indigo-200 transition">🏠 Arch</a>
                 <a href="arango.html" class="hover:text-white text-indigo-200 transition">🥑 Arango</a>
                 <a href="arango-limits.html" class="hover:text-white text-indigo-200 transition">⚠️ Limits</a>
-                <a href="arango-license.html" class="hover:text-white text-indigo-200 transition">📜 License & UI</a>
+                <a href="arango-license.html" class="text-white border-b-2 border-indigo-200 transition">📜 License & UI</a>
                 <a href="shines.html" class="hover:text-white text-indigo-200 transition">✨ Shines</a>
                 <a href="comparison.html" class="hover:text-white text-indigo-200 transition">📊 Compare</a>
                 <a href="before-after.html" class="hover:text-white text-indigo-200 transition">🔄 Before/After</a>
@@ -64,71 +64,84 @@
 
     <header class="bg-indigo-600 text-white py-12">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h1 class="text-4xl font-bold mb-4">Evaluation: Where to use JEV? ⚖️</h1>
-            <p class="text-xl opacity-90">Local (Ollama) vs Cloud (OpenRouter)</p>
+            <h1 class="text-4xl font-bold mb-4">ArangoDB Licensing & Dashboards 📜</h1>
+            <p class="text-xl opacity-90">Understanding Community vs. Enterprise costs and the built-in Web UI.</p>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+        
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Dilemma</h2>
-            <p class="mb-6 text-gray-700">When building your Second Brain, you have to choose an inference engine. Do you run models locally via <strong>Ollama</strong>, or use a multi-model aggregator like <strong>OpenRouter</strong> to access Claude 3.5 and GPT-4o? Here is the architectural evaluation.</p>
-
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Licensing Costs: $0.00</h2>
+            <p class="mb-6 text-gray-700">For building the JEV Second Brain, <strong>your ArangoDB software licensing cost is exactly $0.00</strong>. ArangoDB operates on an open-core model with two distinct editions:</p>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- OpenRouter Eval -->
-                <div class="bg-white p-8 rounded-xl shadow border border-gray-200">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                        <span class="mr-2">🌐</span> OpenRouter (Cloud API)
-                    </h3>
-                    <p class="text-sm text-gray-600 mb-4">Best for: The <strong>Query Phase</strong> where deep reasoning is required.</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-2">✅</span> <span class="text-sm">Access to state-of-the-art reasoning (Claude 3.5 Sonnet, GPT-4o).</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-2">✅</span> <span class="text-sm">Incredibly fast time-to-first-token.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-2">❌</span> <span class="text-sm">Expensive for 100k file ingestion.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-2">❌</span> <span class="text-sm">Privacy risks (sending personal notes to external servers).</span>
-                        </li>
+                <div class="bg-white p-6 rounded-xl border border-green-200 shadow-sm border-t-4 border-t-green-500">
+                    <h3 class="text-xl font-bold text-green-800 mb-2">Community Edition (Free)</h3>
+                    <p class="text-sm text-gray-600 mb-4">Released under the open-source <strong>Apache 2.0 License</strong>. It is completely free for both commercial and personal use. Most importantly, it includes everything required for the JEV architecture:</p>
+                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                        <li>Native Graph Traversals</li>
+                        <li>ArangoSearch (Vector Embeddings & Cosine Similarity)</li>
+                        <li>AQL (ArangoDB Query Language)</li>
+                        <li>Built-in Web Dashboard</li>
                     </ul>
                 </div>
-
-                <!-- Local Eval -->
-                <div class="bg-white p-8 rounded-xl shadow border border-gray-200">
-                    <h3 class="text-2xl font-bold text-indigo-700 mb-4 flex items-center">
-                        <span class="mr-2">💻</span> Ollama (Local)
-                    </h3>
-                    <p class="text-sm text-gray-600 mb-4">Best for: The <strong>Ingestion Phase</strong> processing 100k files continuously.</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-2">✅</span> <span class="text-sm">100% Free. You can ingest files 24/7 without watching the API bill.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-2">✅</span> <span class="text-sm">Total Data Sovereignty. Nothing leaves your machine.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-2">❌</span> <span class="text-sm">Slower processing speed. Requires an M-series Mac or Nvidia GPU.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-2">❌</span> <span class="text-sm">Small local models (8B-70B) might occasionally fail complex Neo4j JSON extractions.</span>
-                        </li>
+                <div class="bg-white p-6 rounded-xl border border-blue-200 shadow-sm border-t-4 border-t-blue-500">
+                    <h3 class="text-xl font-bold text-blue-800 mb-2">Enterprise Edition (Paid)</h3>
+                    <p class="text-sm text-gray-600 mb-4">Designed for massive corporations. It requires a paid license and adds features that a personal Second Brain (even one with 100k files) simply does not need:</p>
+                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                        <li><strong>SmartGraphs:</strong> For sharding graphs across multiple servers (unnecessary for &lt;100M nodes).</li>
+                        <li>Datacenter-to-datacenter replication.</li>
+                        <li>Advanced auditing and LDAP integration.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section class="bg-indigo-50 p-8 rounded-xl border border-indigo-200 mt-12">
-            <h2 class="text-2xl font-bold text-indigo-900 mb-4">The Verdict: Hybrid Architecture</h2>
-            <p class="text-indigo-800">The most resilient architecture uses <strong>both</strong>.</p>
-            <ul class="list-disc list-inside mt-4 text-indigo-700 space-y-2">
-                <li><strong>Use Local Ollama (Llama 3 8B) for INGESTION:</strong> Let it run in the background 24/7, vectorizing and extracting nodes from your 100k Google Drive files for free.</li>
-                <li><strong>Use OpenRouter (Claude 3.5 Sonnet) for QUERYING:</strong> When you actively sit down and ask your Second Brain a complex question, spend the pennies to have Claude 3.5 reason over the Neo4j/Qdrant context provided by LangChain.</li>
-            </ul>
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Built-In Web Dashboard</h2>
+            <p class="mb-4 text-gray-700">Unlike PostgreSQL or Qdrant which require you to install clunky third-party tools (like DBeaver or pgAdmin) to see your data, <strong>ArangoDB ships with a beautiful, fully-featured Web UI right inside the binary.</strong></p>
+
+            <div class="bg-gray-100 rounded-xl p-6 border border-gray-300">
+                <h4 class="font-bold text-gray-800 mb-4">What you can do in the ArangoDB UI:</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <span class="text-xl">🕸️</span>
+                        <div>
+                            <strong class="text-gray-900 block">Visual Graph Explorer</strong>
+                            <span class="text-sm text-gray-600">Click on a project node and visually watch the UI expand the graph outward to show connected team members, tasks, and semantic vectors.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-xl">💻</span>
+                        <div>
+                            <strong class="text-gray-900 block">AQL Query Editor</strong>
+                            <span class="text-sm text-gray-600">Write and execute queries with syntax highlighting. It includes an "Explain" feature that visually shows you the execution plan and query latency.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-xl">📊</span>
+                        <div>
+                            <strong class="text-gray-900 block">Server Metrics</strong>
+                            <span class="text-sm text-gray-600">Monitor your RAM usage, disk I/O, and HTTP connections in real-time—crucial for managing costs on Fly.io.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">How to Access the UI Securely on Fly.io</h2>
+            <p class="mb-4 text-gray-700">Because we enforce the strict security rule of placing ArangoDB on Fly.io's private `.flycast` network, the dashboard is safely hidden from the public internet.</p>
+            <p class="mb-4 text-gray-700">To view your Second Brain dashboard from your local Mac, you create a secure WireGuard tunnel using the Fly CLI:</p>
+            
+            <div class="bg-gray-900 text-green-400 p-6 rounded-xl text-sm font-mono shadow-inner border border-gray-800">
+                # 1. Open a secure tunnel to the internal ArangoDB port<br>
+                flyctl proxy 8529:8529 -a my-arangodb-app<br><br>
+                # 2. Open your browser to the local tunnel<br>
+                open -a "Google Chrome" "http://localhost:8529"<br><br>
+                # 3. Log in with your 'root' user and the password stored in Azure Key Vault.
+            </div>
         </section>
 
     </main>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEV for LLM and AI | Second Brain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6">
+            <h1 class="text-4xl font-bold mb-4">JEV for LLM & AI</h1>
+            <p class="text-xl opacity-90">Orchestrating the 100k-File Second Brain</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-16">
+
+        <!-- Why it matters -->
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Why JEV Matters for a 100k-File Second Brain</h2>
+            <p class="mb-4">When managing a "Second Brain" scaling to 100,000+ files, raw LLMs fail. They suffer from context window limitations, hallucinate when context is missing, and struggle to find needles in an unstructured haystack. <strong>JEV</strong> acts as the intelligent orchestration layer.</p>
+            <p>JEV provides structured retrieval, semantic understanding, and relationship mapping, ensuring that the LLM only receives the most relevant, highly-contextualized data for any given query.</p>
+        </section>
+
+        <!-- JEV vs LLM -->
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">JEV vs Raw LLMs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-semibold text-red-600 mb-3">Using Just an LLM</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li>Strict context window limits (cannot process 100k files at once).</li>
+                        <li>High token costs for repeated, massive prompt injections.</li>
+                        <li>No native understanding of file relationships or directory structures.</li>
+                        <li>Prone to hallucination without targeted retrieval.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-semibold text-green-600 mb-3">Using JEV + LLM</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li>Infinite scale: Pre-filters 100k files down to the top 5 most relevant.</li>
+                        <li>Cost-efficient: Sends only necessary tokens to the LLM.</li>
+                        <li>Graph-aware: Understands how Document A relates to Document B.</li>
+                        <li>Grounded responses: Enforces strict factual adherence to your personal data.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration Architecture -->
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Integration: LangChain, Qdrant, Neo4j & Google Drive</h2>
+            <p class="mb-6">JEV thrives in a modern AI stack. If you are already using Qdrant, Google Drive, and Neo4j, here is how JEV weaves them together using LangChain:</p>
+            
+            <div class="space-y-4">
+                <div class="bg-indigo-50 p-4 rounded border border-indigo-100">
+                    <strong class="text-indigo-800">1. Google Drive (Storage Layer):</strong> Acts as the raw data lake containing your 100k files, notes, and documents. JEV continuously syncs and extracts text/metadata from Drive.
+                </div>
+                <div class="bg-indigo-50 p-4 rounded border border-indigo-100">
+                    <strong class="text-indigo-800">2. Qdrant (Vector Layer):</strong> JEV chunks your Drive files, generates embeddings, and stores them in Qdrant for hyper-fast semantic search (finding "conceptually similar" notes).
+                </div>
+                <div class="bg-indigo-50 p-4 rounded border border-indigo-100">
+                    <strong class="text-indigo-800">3. Neo4j (Graph Layer):</strong> JEV builds a Knowledge Graph in Neo4j, mapping entities (people, projects, concepts) and their relationships across your 100k files.
+                </div>
+                <div class="bg-indigo-50 p-4 rounded border border-indigo-100">
+                    <strong class="text-indigo-800">4. LangChain (Orchestration):</strong> LangChain agents use JEV as a tool. When a user asks a question, LangChain triggers JEV to execute a "GraphRAG" (Graph + Vector) query, pulling similarity from Qdrant and relationship context from Neo4j before sending the final prompt to the LLM.
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">What Can Be Done? (Use Cases)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-lg mb-2">1. Graph-Enhanced RAG</h3>
+                    <p class="text-sm text-gray-600">Query your second brain: "What were my ideas on AI architectures in 2023?" JEV fetches semantic matches from Qdrant and linked project nodes from Neo4j for a complete answer.</p>
+                </div>
+                <div class="bg-white p-6 rounded shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-lg mb-2">2. Cross-Pollination of Ideas</h3>
+                    <p class="text-sm text-gray-600">JEV can proactively scan Neo4j to find isolated notes that share similar vectors in Qdrant, suggesting new connections and insights from forgotten files in Drive.</p>
+                </div>
+                <div class="bg-white p-6 rounded shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-lg mb-2">3. Automated Briefing Generation</h3>
+                    <p class="text-sm text-gray-600">Before a meeting, ask JEV to compile a brief. It uses LangChain to gather all Drive docs, Neo4j relationship history, and Qdrant sentiment analysis regarding a specific person or project.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12">
+        <p>&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
+    </footer>
+
+</body>
+</html>

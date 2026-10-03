@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Your Second Brain | JEV</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+import os
+import re
 
-    <!-- Shared Navigation -->
+new_nav = """    <!-- Shared Navigation -->
     <nav class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center border-b border-indigo-800 gap-4">
             <div class="font-bold text-xl tracking-wide text-indigo-100 flex items-center gap-2">
@@ -44,64 +37,9 @@
                 <a href="hermes.html" class="hover:text-white text-indigo-200 transition">🤖 Hermes</a>
             </div>
         </div>
-    </nav>
+    </nav>"""
 
-    <!-- Header -->
-    <header class="bg-indigo-600 text-white py-12">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h1 class="text-4xl font-bold mb-4">Prompting the Second Brain 🧠</h1>
-            <p class="text-xl opacity-90">How to structurally update your 100k-file repository</p>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
-
-        <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The "Update" Prompt</h2>
-            <p class="mb-4">When adding a new file to Google Drive, use this prompt to trigger LangChain into extracting the right graph nodes and vector chunks. This ensures your knowledge graph remains clean and deeply connected.</p>
-            
-            <div class="bg-gray-900 text-green-400 p-6 rounded-lg shadow-inner font-mono text-sm overflow-x-auto">
-<pre>
-SYSTEM DIRECTIVE: SECOND BRAIN INGESTION
-----------------------------------------
-You are the JEV Ingestion Agent. A new document has been added to Google Drive.
-Your goal is to parse this document and update the semantic and structural databases.
-
-1. SEMANTIC EXTRACTION (For Qdrant):
-   - Summarize the core concepts of this document in 3-5 concise bullet points.
-   - Extract the 5 most important keywords/phrases.
-
-2. STRUCTURAL EXTRACTION (For Neo4j):
-   Identify and map the following entities:
-   - [Author/People]: Who created this or is mentioned?
-   - [Projects]: What overarching project does this belong to?
-   - [Concepts]: What high-level concepts does this tie into?
-   - Return relationships in format: (EntityA)-[:RELATED_TO]->(EntityB)
-
-3. LANGCHAIN TOOL EXECUTION:
-   - Call `qdrant_upsert(chunks, metadata)`
-   - Call `neo4j_merge_nodes_and_edges(entities, relationships)`
-
-DOCUMENT CONTENT:
-[Paste your raw note/document here]
-</pre>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">First Principles: Structured Prompting</h2>
-            <p class="mb-4"><strong>Rationale:</strong> We don't just dump text into a database. We force the LLM to structure the unstructured.</p>
-            <ul class="list-disc list-inside space-y-3 text-gray-700">
-                <li><strong>Explicit Entity Extraction:</strong> By forcing the LLM to output Neo4j Cypher-like relationships, we guarantee the Graph layer understands *how* this new file relates to older files.</li>
-                <li><strong>Vector Distillation:</strong> By summarizing core concepts for Qdrant, we reduce noise and improve the signal-to-noise ratio during future semantic searches.</li>
-                <li><strong>Agentic Tool Calling:</strong> The prompt explicitly tells LangChain which tools to use (`qdrant_upsert`, `neo4j_merge`), moving the LLM from a passive text generator to an active database manager.</li>
-            </ul>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
+new_footer = """    <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-12 text-center mt-12 flex flex-col items-center gap-6 border-t border-gray-800">
         <div class="flex items-center gap-3 bg-gray-800 px-5 py-2.5 rounded-full shadow-inner border border-gray-700">
             <span class="flex h-3 w-3 relative">
@@ -112,7 +50,24 @@ DOCUMENT CONTENT:
         </div>
         <p class="text-sm">&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
         <a href="https://rifaterdemsahin.github.io/jev/" target="_blank" class="text-indigo-400 hover:text-white underline transition text-sm">View Live on GitHub Pages</a>
-    </footer>
+    </footer>"""
 
-</body>
-</html>
+for f in os.listdir('.'):
+    if f.endswith('.html'):
+        with open(f, 'r') as file:
+            content = file.read()
+        
+        # Replace nav (handle both with and without the comment just in case)
+        if '<!-- Shared Navigation -->' in content:
+            content = re.sub(r'    <!-- Shared Navigation -->\n    <nav.*?</nav>', new_nav, content, flags=re.DOTALL)
+        else:
+            content = re.sub(r'    <nav.*?</nav>', new_nav, content, flags=re.DOTALL)
+            
+        # Replace footer
+        if '<!-- Footer -->' in content:
+            content = re.sub(r'    <!-- Footer -->\n    <footer.*?</footer>', new_footer, content, flags=re.DOTALL)
+        else:
+            content = re.sub(r'    <footer.*?</footer>', new_footer, content, flags=re.DOTALL)
+            
+        with open(f, 'w') as file:
+            file.write(content)

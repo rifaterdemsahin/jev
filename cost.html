@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Analysis | JEV Second Brain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <!-- Shared Navigation -->
+    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50 flex flex-col lg:flex-row justify-between items-center gap-4">
+        <div class="flex flex-wrap gap-4 font-medium justify-center items-center text-sm">
+            <a href="index.html" class="hover:text-indigo-300 transition">🏠 Arch</a>
+            <a href="before-after.html" class="hover:text-indigo-300 transition">🔄 Before/After</a>
+            <a href="prompt.html" class="hover:text-indigo-300 transition">🧠 Prompt</a>
+            <a href="ollama.html" class="hover:text-indigo-300 transition">🦙 Ollama Intro</a>
+            <a href="ollama-install.html" class="hover:text-indigo-300 transition">💻 Install Local</a>
+            <a href="async.html" class="hover:text-indigo-300 transition">⚡ Async</a>
+            <a href="cost.html" class="hover:text-indigo-300 transition">💰 Cost</a>
+            <a href="eval.html" class="hover:text-indigo-300 transition">⚖️ Local vs OpenRouter</a>
+        </div>
+        <div class="relative">
+            <input type="search" placeholder="Search pages..." class="px-4 py-1.5 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm w-48 md:w-64">
+            <span class="absolute right-3 top-1.5 text-gray-400">🔍</span>
+        </div>
+    </nav>
+
+    <header class="bg-indigo-600 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4">Cost Analysis 💰</h1>
+            <p class="text-xl opacity-90">What does it cost to process 100,000 files?</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The 100k File Ingestion Problem</h2>
+            <p class="mb-4 text-gray-700">When processing a Second Brain of this magnitude, the true cost lies not in querying, but in <strong>Ingestion</strong> (Extracting entities for Neo4j and summaries for Qdrant).</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <!-- Cloud Costs -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 border-t-4 border-t-red-500">
+                    <h3 class="text-xl font-bold text-red-700 mb-4">Cloud API (OpenAI / OpenRouter)</h3>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><strong>Token Math:</strong> ~1,000 tokens per document * 100,000 files = 100 Million Tokens.</li>
+                        <li><strong>GPT-4o-Mini:</strong> ~$0.15 per 1M input tokens &rarr; <strong>$15.00</strong> for one pass.</li>
+                        <li><strong>GPT-4o / Claude 3.5 Sonnet:</strong> ~$3.00 to $5.00 per 1M input tokens &rarr; <strong>$300 to $500</strong> for one ingestion pass.</li>
+                        <li><strong>Embeddings:</strong> ~$2.00 to embed 100M tokens.</li>
+                    </ul>
+                    <p class="mt-4 font-bold text-red-800">Total Ingestion Cost: $17 - $500+</p>
+                </div>
+
+                <!-- Local Costs -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 border-t-4 border-t-green-500">
+                    <h3 class="text-xl font-bold text-green-700 mb-4">Local Execution (Ollama)</h3>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><strong>Token Math:</strong> 100 Million Tokens run on your local hardware.</li>
+                        <li><strong>Inference Cost:</strong> $0.00 (Requires an M1/M2/M3 Mac or discrete GPU).</li>
+                        <li><strong>Embeddings:</strong> $0.00 (Using `nomic-embed-text`).</li>
+                        <li><strong>Time Cost:</strong> Generating 100M tokens locally might take several days of background processing.</li>
+                    </ul>
+                    <p class="mt-4 font-bold text-green-800">Total Ingestion Cost: $0.00 (plus electricity)</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Database Hosting Costs</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 shadow-sm rounded-lg">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left border-b font-semibold text-gray-700">Service</th>
+                            <th class="py-3 px-4 text-left border-b font-semibold text-gray-700">Self-Hosted (Local/Docker)</th>
+                            <th class="py-3 px-4 text-left border-b font-semibold text-gray-700">Managed Cloud</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr>
+                            <td class="py-3 px-4 border-b font-medium text-gray-800">Qdrant (Vector)</td>
+                            <td class="py-3 px-4 border-b text-green-600 font-bold">$0.00</td>
+                            <td class="py-3 px-4 border-b text-gray-600">~$25.00 / month</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b font-medium text-gray-800">Neo4j (Graph)</td>
+                            <td class="py-3 px-4 border-b text-green-600 font-bold">$0.00</td>
+                            <td class="py-3 px-4 border-b text-gray-600">~$65.00 / month (AuraDB)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-medium text-gray-800">Google Drive</td>
+                            <td class="py-3 px-4 text-gray-600">Existing Google One Plan</td>
+                            <td class="py-3 px-4 text-gray-600">Existing Google One Plan</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12 flex flex-col items-center gap-2">
+        <p>&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
+        <a href="https://rifaterdemsahin.github.io/jev/" target="_blank" class="text-indigo-300 hover:text-white underline transition">Live on GitHub Pages</a>
+    </footer>
+
+</body>
+</html>

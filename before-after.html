@@ -9,13 +9,20 @@
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
     <!-- Shared Navigation -->
-    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex flex-wrap gap-6 font-medium justify-center items-center text-sm md:text-base">
-            <a href="index.html" class="hover:text-indigo-300 transition">🏠 Architecture</a>
-            <a href="before-after.html" class="hover:text-indigo-300 transition">🔄 Before & After</a>
-            <a href="prompt.html" class="hover:text-indigo-300 transition">🧠 Second Brain Prompt</a>
-            <a href="ollama.html" class="hover:text-indigo-300 transition">🦙 Ollama Integration</a>
-            <a href="async.html" class="hover:text-indigo-300 transition">⚡ Async Processing</a>
+    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50 flex flex-col lg:flex-row justify-between items-center gap-4">
+        <div class="flex flex-wrap gap-4 font-medium justify-center items-center text-sm">
+            <a href="index.html" class="hover:text-indigo-300 transition">🏠 Arch</a>
+            <a href="before-after.html" class="hover:text-indigo-300 transition">🔄 Before/After</a>
+            <a href="prompt.html" class="hover:text-indigo-300 transition">🧠 Prompt</a>
+            <a href="ollama.html" class="hover:text-indigo-300 transition">🦙 Ollama Intro</a>
+            <a href="ollama-install.html" class="hover:text-indigo-300 transition">💻 Install Local</a>
+            <a href="async.html" class="hover:text-indigo-300 transition">⚡ Async</a>
+            <a href="cost.html" class="hover:text-indigo-300 transition">💰 Cost</a>
+            <a href="eval.html" class="hover:text-indigo-300 transition">⚖️ Local vs OpenRouter</a>
+        </div>
+        <div class="relative">
+            <input type="search" placeholder="Search pages..." class="px-4 py-1.5 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm w-48 md:w-64">
+            <span class="absolute right-3 top-1.5 text-gray-400">🔍</span>
         </div>
     </nav>
 

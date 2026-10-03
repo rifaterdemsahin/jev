@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Processing with JEV | Scalability</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <!-- Shared Navigation -->
+    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-wrap gap-6 font-medium justify-center items-center text-sm md:text-base">
+            <a href="index.html" class="hover:text-indigo-300 transition">🏠 Architecture</a>
+            <a href="before-after.html" class="hover:text-indigo-300 transition">🔄 Before & After</a>
+            <a href="prompt.html" class="hover:text-indigo-300 transition">🧠 Second Brain Prompt</a>
+            <a href="ollama.html" class="hover:text-indigo-300 transition">🦙 Ollama Integration</a>
+            <a href="async.html" class="hover:text-indigo-300 transition">⚡ Async Processing</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4">Improving Async Processing ⚡</h1>
+            <p class="text-xl opacity-90">How to handle 100k files without blocking the UI</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">First Principles: Event-Driven Non-Blocking UX</h2>
+            <p class="mb-4"><strong>Rationale:</strong> Processing a new file involves parsing text, generating vector embeddings (Qdrant), extracting graph entities via LLM (Neo4j), and syncing states. If done synchronously, the user interface will freeze for minutes. For 100k files, it takes days.</p>
+            <p><strong>The Solution:</strong> Implement an Event-Driven, Asynchronous Queue Architecture (e.g., Celery, RabbitMQ, or Redis/BullMQ) to decouple ingestion from the user experience.</p>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Async Architecture Pipeline</h2>
+            
+            <div class="relative border-l-4 border-indigo-400 pl-6 space-y-8 ml-4">
+                
+                <div>
+                    <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
+                    <h3 class="text-xl font-bold text-indigo-900">1. Webhook / File Watcher (Instant)</h3>
+                    <p class="text-gray-700">A new file is dropped into Google Drive. A webhook instantly fires to JEV, adding a <code>{file_id, status: pending}</code> to the Redis Queue. The UI immediately shows "File Queued" and remains responsive.</p>
+                </div>
+
+                <div>
+                    <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
+                    <h3 class="text-xl font-bold text-indigo-900">2. Background Worker: Parsing (Async)</h3>
+                    <p class="text-gray-700">A background worker picks up the job, downloads the file, and runs OCR/Text Extraction without blocking the main server.</p>
+                </div>
+
+                <div>
+                    <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
+                    <h3 class="text-xl font-bold text-indigo-900">3. Background Worker: Embedding & Graph (Async)</h3>
+                    <p class="text-gray-700">The worker sends text to the embedding model (or Ollama), pushes vectors to Qdrant, and executes LangChain to merge nodes into Neo4j. This is heavily parallelized across worker nodes.</p>
+                </div>
+
+                <div>
+                    <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
+                    <h3 class="text-xl font-bold text-indigo-900">4. WebSocket Push to Client (Instant)</h3>
+                    <p class="text-gray-700">Once the pipeline finishes, the worker publishes a completion event. The JEV frontend receives a WebSocket message, updating the UI to say "Brain Updated: 1 New Concept Mapped" natively.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12 flex flex-col items-center gap-2">
+        <p>&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
+        <a href="https://rifaterdemsahin.github.io/jev/" target="_blank" class="text-indigo-300 hover:text-white underline transition">Live on GitHub Pages</a>
+    </footer>
+
+</body>
+</html>

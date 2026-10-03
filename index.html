@@ -8,11 +8,14 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
 
-    <!-- Navigation -->
-    <nav class="bg-indigo-700 text-white p-4 shadow-md">
-        <div class="max-w-5xl mx-auto flex gap-6 font-medium">
-            <a href="index.html" class="hover:text-indigo-200 transition">Overview</a>
-            <a href="before-after.html" class="hover:text-indigo-200 transition">Before & After</a>
+    <!-- Shared Navigation -->
+    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-wrap gap-6 font-medium justify-center items-center text-sm md:text-base">
+            <a href="index.html" class="hover:text-indigo-300 transition">🏠 Architecture</a>
+            <a href="before-after.html" class="hover:text-indigo-300 transition">🔄 Before & After</a>
+            <a href="prompt.html" class="hover:text-indigo-300 transition">🧠 Second Brain Prompt</a>
+            <a href="ollama.html" class="hover:text-indigo-300 transition">🦙 Ollama Integration</a>
+            <a href="async.html" class="hover:text-indigo-300 transition">⚡ Async Processing</a>
         </div>
     </nav>
 
@@ -59,23 +62,57 @@
             </div>
         </section>
 
-        <!-- Integration Architecture -->
+        <!-- Architecture Visual & Integration -->
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Integration: LangChain, Qdrant, Neo4j & Google Drive</h2>
-            <p class="mb-6">JEV thrives in a modern AI stack. If you are already using Qdrant, Google Drive, and Neo4j, here is how JEV weaves them together using LangChain:</p>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Architecture & First Principles 🏛️</h2>
+            <p class="mb-6"><strong>First Principle: Separation of Concerns.</strong> We decouple storage (Drive), semantic meaning (Qdrant), structural relations (Neo4j), and reasoning (LLM/LangChain). This ensures infinite horizontal scalability without overloading the LLM context window.</p>
             
+            <!-- Architectural Visual Diagram -->
+            <div class="bg-slate-800 text-white p-8 rounded-xl shadow-lg mb-8 flex flex-col md:flex-row items-center justify-between text-center gap-4">
+                <div class="p-4 bg-blue-600 rounded-lg w-full md:w-1/5 shadow-inner">
+                    <div class="text-3xl mb-2">📁</div>
+                    <div class="font-bold">Google Drive</div>
+                    <div class="text-xs opacity-80 mt-1">100k Raw Files</div>
+                </div>
+                <div class="text-2xl text-slate-400">➡️</div>
+                <div class="flex flex-col gap-4 w-full md:w-1/4">
+                    <div class="p-4 bg-purple-600 rounded-lg shadow-inner">
+                        <div class="text-2xl mb-1">🎯</div>
+                        <div class="font-bold text-sm">Qdrant</div>
+                        <div class="text-xs opacity-80">Vector DB (Semantics)</div>
+                    </div>
+                    <div class="p-4 bg-teal-600 rounded-lg shadow-inner">
+                        <div class="text-2xl mb-1">🕸️</div>
+                        <div class="font-bold text-sm">Neo4j</div>
+                        <div class="text-xs opacity-80">Graph DB (Relations)</div>
+                    </div>
+                </div>
+                <div class="text-2xl text-slate-400">➡️</div>
+                <div class="p-4 bg-orange-600 rounded-lg w-full md:w-1/5 shadow-inner">
+                    <div class="text-3xl mb-2">🦜🔗</div>
+                    <div class="font-bold">LangChain</div>
+                    <div class="text-xs opacity-80 mt-1">Orchestration & Tools</div>
+                </div>
+                <div class="text-2xl text-slate-400">➡️</div>
+                <div class="p-4 bg-indigo-500 rounded-lg w-full md:w-1/5 shadow-inner">
+                    <div class="text-3xl mb-2">🧠</div>
+                    <div class="font-bold">LLM</div>
+                    <div class="text-xs opacity-80 mt-1">Generation</div>
+                </div>
+            </div>
+
             <div class="space-y-4">
                 <div class="bg-indigo-50 p-4 rounded border border-indigo-100">
-                    <strong class="text-indigo-800">1. Google Drive (Storage Layer):</strong> Acts as the raw data lake containing your 100k files, notes, and documents. JEV continuously syncs and extracts text/metadata from Drive.
+                    <strong class="text-indigo-800">1. Google Drive (Storage Layer):</strong> Acts as the raw data lake. JEV continuously syncs and extracts text/metadata from Drive.
                 </div>
                 <div class="bg-indigo-50 p-4 rounded border border-indigo-100">
-                    <strong class="text-indigo-800">2. Qdrant (Vector Layer):</strong> JEV chunks your Drive files, generates embeddings, and stores them in Qdrant for hyper-fast semantic search (finding "conceptually similar" notes).
+                    <strong class="text-indigo-800">2. Qdrant (Vector Layer):</strong> JEV chunks files, generates embeddings, and stores them for hyper-fast semantic search (finding "conceptually similar" notes).
                 </div>
                 <div class="bg-indigo-50 p-4 rounded border border-indigo-100">
-                    <strong class="text-indigo-800">3. Neo4j (Graph Layer):</strong> JEV builds a Knowledge Graph in Neo4j, mapping entities (people, projects, concepts) and their relationships across your 100k files.
+                    <strong class="text-indigo-800">3. Neo4j (Graph Layer):</strong> Maps explicit entities (people, projects, concepts) and their relationships.
                 </div>
                 <div class="bg-indigo-50 p-4 rounded border border-indigo-100">
-                    <strong class="text-indigo-800">4. LangChain (Orchestration):</strong> LangChain agents use JEV as a tool. When a user asks a question, LangChain triggers JEV to execute a "GraphRAG" (Graph + Vector) query, pulling similarity from Qdrant and relationship context from Neo4j before sending the final prompt to the LLM.
+                    <strong class="text-indigo-800">4. LangChain (Orchestration):</strong> LangChain agents use JEV as a tool to execute a "GraphRAG" query, merging Qdrant similarity and Neo4j relations before calling the LLM.
                 </div>
             </div>
         </section>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEV with Ollama | Local LLM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <!-- Shared Navigation -->
+    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-wrap gap-6 font-medium justify-center items-center text-sm md:text-base">
+            <a href="index.html" class="hover:text-indigo-300 transition">🏠 Architecture</a>
+            <a href="before-after.html" class="hover:text-indigo-300 transition">🔄 Before & After</a>
+            <a href="prompt.html" class="hover:text-indigo-300 transition">🧠 Second Brain Prompt</a>
+            <a href="ollama.html" class="hover:text-indigo-300 transition">🦙 Ollama Integration</a>
+            <a href="async.html" class="hover:text-indigo-300 transition">⚡ Async Processing</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4">Using JEV with Ollama 🦙</h1>
+            <p class="text-xl opacity-90">100% Local, Private, and Cost-Free Second Brain Execution</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">First Principles: Data Sovereignty</h2>
+            <p class="mb-4"><strong>Rationale:</strong> A Second Brain contains your most intimate thoughts, proprietary code, and confidential business documents. Sending 100k files to a cloud provider like OpenAI or Anthropic poses severe privacy risks and astronomical API costs.</p>
+            <p><strong>The Solution:</strong> By integrating <strong>Ollama</strong>, you run open-weights models (like Llama 3 or Mistral) entirely locally on your own silicon. Combined with local instances of Qdrant and Neo4j, JEV achieves total data sovereignty.</p>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">How to Setup Ollama with JEV</h2>
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-2">Step 1: Install & Run Ollama</h3>
+                    <p class="mb-2 text-sm text-gray-600">Download Ollama and pull a highly capable instruction model.</p>
+                    <code class="block bg-gray-100 p-3 rounded text-sm font-mono text-gray-800">ollama run llama3</code>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-2">Step 2: Configure LangChain for Local Inference</h3>
+                    <p class="mb-2 text-sm text-gray-600">Point LangChain's LLM wrapper to your local Ollama port (usually `11434`) instead of OpenAI.</p>
+<pre class="bg-gray-100 p-3 rounded text-sm font-mono text-gray-800 overflow-x-auto">
+from langchain_community.llms import Ollama
+
+llm = Ollama(model="llama3")
+
+# Pass this local LLM into your JEV GraphRAG chain
+chain = GraphRAGChain(llm=llm, qdrant_client=qdrant, neo4j_graph=graph)
+</pre>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-2">Step 3: Local Embeddings</h3>
+                    <p class="text-sm text-gray-600">For Qdrant to work locally, use local embeddings (like `nomic-embed-text` via Ollama or HuggingFace BGE models) instead of `text-embedding-ada-002`.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12 flex flex-col items-center gap-2">
+        <p>&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
+        <a href="https://rifaterdemsahin.github.io/jev/" target="_blank" class="text-indigo-300 hover:text-white underline transition">Live on GitHub Pages</a>
+    </footer>
+
+</body>
+</html>

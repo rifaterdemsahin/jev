@@ -66,6 +66,46 @@
         </section>
 
         <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Execution Costs by Use Case</h2>
+            <p class="mb-6 text-gray-700">Once your brain is ingested, here is the cost of running specific actions. <em>(Estimates based on OpenRouter Claude 3.5 Sonnet pricing: $3/1M in, $15/1M out. Local Ollama is always $0.)</em></p>
+
+            <div class="space-y-6">
+                <!-- Use Case 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-2">1. Graph-Enhanced RAG</h3>
+                    <p class="text-sm text-gray-600 mb-3"><strong>Action:</strong> You ask: <em>"What were my ideas on AI architectures in 2023?"</em> JEV fetches semantic matches from Qdrant and linked project nodes from Neo4j.</p>
+                    <div class="bg-gray-50 p-3 rounded border border-gray-100 text-sm flex justify-between items-center">
+                        <div><span class="font-semibold text-gray-700">Context Loaded:</span> ~4,000 tokens</div>
+                        <div><span class="font-semibold text-gray-700">Cloud Cost:</span> <span class="text-red-600">~$0.02</span> per query</div>
+                        <div><span class="font-semibold text-gray-700">Local Cost:</span> <span class="text-green-600">$0.00</span></div>
+                    </div>
+                </div>
+
+                <!-- Use Case 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-2">2. Cross-Pollination of Ideas</h3>
+                    <p class="text-sm text-gray-600 mb-3"><strong>Action:</strong> Nightly proactive scanning of Neo4j/Qdrant to find hidden connections in your 100k files and suggest new insights.</p>
+                    <div class="bg-gray-50 p-3 rounded border border-gray-100 text-sm flex justify-between items-center">
+                        <div><span class="font-semibold text-gray-700">Context Loaded:</span> ~250,000 tokens (batch)</div>
+                        <div><span class="font-semibold text-gray-700">Cloud Cost:</span> <span class="text-red-600">~$1.50</span> per night</div>
+                        <div><span class="font-semibold text-gray-700">Local Cost:</span> <span class="text-green-600">$0.00</span> (Recommended)</div>
+                    </div>
+                </div>
+
+                <!-- Use Case 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-2">3. Automated Briefing Generation</h3>
+                    <p class="text-sm text-gray-600 mb-3"><strong>Action:</strong> Aggregating massive history from Drive, Neo4j, and Qdrant to write a dense 5-page briefing document before a big meeting.</p>
+                    <div class="bg-gray-50 p-3 rounded border border-gray-100 text-sm flex justify-between items-center">
+                        <div><span class="font-semibold text-gray-700">Context Loaded:</span> ~30,000 tokens in, 2,000 out</div>
+                        <div><span class="font-semibold text-gray-700">Cloud Cost:</span> <span class="text-red-600">~$0.12</span> per brief</div>
+                        <div><span class="font-semibold text-gray-700">Local Cost:</span> <span class="text-green-600">$0.00</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Database Hosting Costs</h2>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-200 shadow-sm rounded-lg">

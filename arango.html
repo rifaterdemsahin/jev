@@ -134,14 +134,15 @@ FOR doc, edge IN 1..2 OUTBOUND 'Projects/Phoenix' project_edges
 You are an expert DevOps engineer specializing in Fly.io edge deployments and Multi-Model RAG architectures.
 
 [Task]
-Generate a complete Fly.io deployment pipeline for a Unified ArangoDB RAG Second Brain. The architecture consists of a persistent ArangoDB database (Graph + Vector) and a Python/LangChain FastAPI orchestration service.
+Generate a complete Fly.io deployment pipeline and application codebase for a Unified ArangoDB RAG Second Brain. The architecture consists of a persistent ArangoDB database, a Python/LangChain FastAPI orchestration service, and a recurring synchronization script.
 
 [Constraints]
 1. ArangoDB Config: Provide a `fly.toml` with a `[mounts]` section for persistent volume storage to prevent data loss.
 2. App Config: Provide a `fly.toml` and a production-ready `Dockerfile` for the Python LangChain service.
 3. Secure Networking: You must configure Fly.io's private IPv6 network (`.flycast` / 6PN) to isolate the database from the public internet, mirroring the secure network topologies used by enterprise RAG frameworks.
-4. CLI Commands: Provide step-by-step `flyctl` commands to provision the volume, launch the apps, and inject database credentials via secrets.
-5. Local Ingestion via Ollama: Explicitly detail how a user running a local macOS machine with Ollama (Llama 3 & Nomic-Embed) can securely tunnel into the remote ArangoDB instance (e.g., using `flyctl proxy`) to process and ingest their local Markdown files over a secure connection.
+4. Secrets via Azure Key Vault: Provide a deployment bash script that automatically fetches the required database passwords and API tokens from an already logged-in Azure CLI (`az keyvault secret show`) and injects them directly into Fly.io via `fly secrets set`.
+5. ArangoDB RAG Code: Provide the actual Python LangChain orchestration code demonstrating how to execute combined Graph-Vector retrieval natively within ArangoDB using AQL.
+6. Recurring Sync Code: Provide a Python synchronization script designed to run periodically (e.g., via cron). This script must fetch new local files, process them via local Ollama (Llama 3 & Nomic-Embed), and securely tunnel into the remote ArangoDB instance to update the second brain.
 
 [Rules]
 - Never expose the database ports to the public internet.

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Preparation & Support Documents | JEV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <!-- Shared Navigation -->
+    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50 flex flex-col xl:flex-row justify-between items-center gap-4">
+        <div class="flex flex-wrap gap-4 font-medium justify-center items-center text-sm">
+            <a href="index.html" class="hover:text-indigo-300 transition">🏠 Arch</a>
+            <a href="before-after.html" class="hover:text-indigo-300 transition">🔄 Before/After</a>
+            <a href="prompt.html" class="hover:text-indigo-300 transition">🧠 Prompt</a>
+            <a href="ollama.html" class="hover:text-indigo-300 transition">🦙 Ollama Intro</a>
+            <a href="ollama-install.html" class="hover:text-indigo-300 transition">💻 Install Local</a>
+            <a href="prepare.html" class="hover:text-indigo-300 transition font-bold text-indigo-200 border-b-2 border-indigo-200">🛠️ System Prep</a>
+            <a href="async.html" class="hover:text-indigo-300 transition">⚡ Async</a>
+            <a href="cost.html" class="hover:text-indigo-300 transition">💰 Cost</a>
+            <a href="eval.html" class="hover:text-indigo-300 transition">⚖️ Eval</a>
+            <a href="frontier.html" class="hover:text-indigo-300 transition">🚀 Hybrid</a>
+        </div>
+        <div class="relative">
+            <input type="search" placeholder="Search pages..." class="px-4 py-1.5 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm w-48 md:w-64">
+            <span class="absolute right-3 top-1.5 text-gray-400">🔍</span>
+        </div>
+    </nav>
+
+    <header class="bg-indigo-600 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4">System Prep & Support Docs 🛠️</h1>
+            <p class="text-xl opacity-90">Structuring your local Ollama environment and seeding it with reference data</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The "Support Document" Strategy</h2>
+            <p class="mb-4 text-gray-700">Before you ask LangChain to reason over your personal notes, you should pre-load JEV with <strong>Support Documents</strong>. These are external reference materials—like the official LangChain API docs, Python manuals, or specific technical PDFs—that you ingest locally via Ollama.</p>
+            <p class="mb-4 text-gray-700"><strong>Why?</strong> LLMs hallucinate code syntax. By seeding your local Qdrant vector database with actual, up-to-date documentation, your LangChain agents will always generate syntactically correct code based on your local reference library.</p>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Step 1: Local System Folder Architecture</h2>
+            <p class="mb-4 text-gray-700">Organize your local system so the JEV ingestion script knows what to process.</p>
+            
+            <div class="bg-gray-900 text-green-400 p-6 rounded-xl font-mono text-sm shadow-inner overflow-x-auto border border-gray-800">
+<pre>
+/Users/rifaterdemsahin/SecondBrain/
+│
+├── /01_Personal_Notes/        # Your 100k daily notes
+│
+├── /02_Projects/              # Active project files
+│
+└── /03_Support_Docs/          # Reference manuals
+    ├── /LangChain_Docs/       # Downloaded markdown of LangChain API
+    ├── /React_Docs/           # Frontend references
+    └── /Neo4j_Cypher_Cheat/   # Graph query references
+</pre>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Step 2: Batch Ingestion via Local Ollama</h2>
+            <p class="mb-4 text-gray-700">Run this Python script locally to iterate through your `/03_Support_Docs/` folder. It uses your local Ollama instance (saving you thousands of dollars in API costs) to vectorize the documentation and build the Neo4j knowledge graph.</p>
+            
+<pre class="bg-gray-100 p-6 rounded-xl text-sm font-mono shadow-sm overflow-x-auto border border-gray-200">
+import os
+import glob
+from langchain_community.llms import Ollama
+from langchain_community.embeddings import OllamaEmbeddings
+from langchain_community.vectorstores import Qdrant
+
+# 1. Connect to Local Ollama (Free, Private, Infinite Scale)
+local_llm = Ollama(model="llama3", base_url="http://localhost:11434")
+local_embed = OllamaEmbeddings(model="nomic-embed-text")
+
+# 2. Target the Support Docs Directory
+support_docs_path = "/Users/rifaterdemsahin/SecondBrain/03_Support_Docs/**/*.md"
+files = glob.glob(support_docs_path, recursive=True)
+
+print(f"Found {len(files)} support documents to ingest.")
+
+for file_path in files:
+    with open(file_path, 'r') as f:
+        content = f.read()
+        
+        # 3. Vectorize for Qdrant using local embeddings
+        vector = local_embed.embed_query(content)
+        
+        # 4. Extract concepts for Neo4j using local Llama 3
+        extraction_prompt = f"Extract key technical concepts from this doc:\n\n{content}"
+        graph_entities = local_llm.invoke(extraction_prompt)
+        
+        # 5. Save to Local DBs (Code omitted for brevity)
+        # qdrant_client.upsert(...)
+        # neo4j_client.execute_query(...)
+        
+        print(f"✅ Ingested: {os.path.basename(file_path)}")
+</pre>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Step 3: Querying the Support Docs</h2>
+            <p class="text-gray-700">In the future, when you use the <strong>Hybrid Frontier Architecture</strong>, your cloud model (like GPT-4o) will seamlessly search Qdrant. If you ask, <em>"How do I use LangChain's MultiQueryRetriever?"</em>, JEV will pull the exact API documentation you ingested locally, resulting in flawless code generation.</p>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12 flex flex-col items-center gap-2">
+        <p>&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
+        <a href="https://rifaterdemsahin.github.io/jev/" target="_blank" class="text-indigo-300 hover:text-white underline transition">Live on GitHub Pages</a>
+    </footer>
+
+</body>
+</html>

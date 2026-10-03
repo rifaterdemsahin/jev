@@ -99,6 +99,48 @@
                 pip install langchain-community qdrant-client neo4j
             </div>
         </section>
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">4. Running JEV on your Mac (The Execution Loop)</h2>
+            <p class="mb-4 text-gray-700">Once Ollama is running in the background on your Mac, you can execute JEV's Python pipeline entirely locally. Here is a detailed example of how JEV processes a local Markdown file from your macOS <code>~/Documents/</code> folder.</p>
+            
+            <div class="bg-gray-900 text-green-400 p-6 rounded-xl text-sm font-mono shadow-inner border border-gray-800 overflow-x-auto">
+<pre>
+import os
+from langchain_community.llms import Ollama
+from langchain_community.embeddings import OllamaEmbeddings
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+# 1. Connect to macOS Local Ollama Daemon
+# This runs entirely on your Apple Silicon chip (Zero Cloud Cost)
+mac_llm = Ollama(model="llama3", base_url="http://localhost:11434")
+mac_embedder = OllamaEmbeddings(model="nomic-embed-text")
+
+# 2. Read a Local Markdown File from the macOS Filesystem
+file_path = os.path.expanduser("~/Documents/SecondBrain/project-phoenix.md")
+with open(file_path, "r") as file:
+    raw_document = file.read()
+
+# 3. JEV Action A: Extract Graph Relationships via Llama 3
+print("Extracting Graph Nodes using Apple Silicon...")
+cypher_extraction_prompt = f"Extract Neo4j relationships from this text:\n{raw_document}"
+graph_nodes = mac_llm.invoke(cypher_extraction_prompt)
+# -> Send graph_nodes to local Neo4j database
+
+# 4. JEV Action B: Chunk and Vectorize
+print("Vectorizing text via Nomic-Embed...")
+splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = splitter.split_text(raw_document)
+
+# 5. Embed the chunks into your local Qdrant Vector DB
+vector_embeddings = mac_embedder.embed_documents(chunks)
+# -> Send vector_embeddings to local Qdrant
+
+print("✅ JEV Local Ingestion Complete!")
+</pre>
+            </div>
+            <p class="mt-4 text-gray-700 text-sm"><strong>The macOS Advantage:</strong> Because Apple Silicon uses Unified Memory, the pipeline can seamlessly switch between the heavy <code>llama3</code> extraction and the lightweight <code>nomic-embed-text</code> vectorization instantly, without transferring data across a slow PCIe bus like traditional PC graphics cards.</p>
+        </section>
+
     </main>
 
     <!-- Footer -->

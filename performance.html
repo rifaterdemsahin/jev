@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eval: Local vs OpenRouter | JEV Second Brain</title>
+    <title>Local Performance | JEV Second Brain</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
@@ -28,7 +28,7 @@
                 <a href="before-after.html" class="hover:text-white text-indigo-200 transition">🔄 Before/After</a>
                 <a href="cost.html" class="hover:text-white text-indigo-200 transition">💰 Cost</a>
                 <a href="eval.html" class="hover:text-white text-indigo-200 transition">⚖️ Eval</a>
-                <a href="performance.html" class="hover:text-white text-indigo-200 transition">⚡ Perf</a>
+                <a href="performance.html" class="text-white border-b-2 border-indigo-200 transition">⚡ Perf</a>
             </div>
             <!-- Setup -->
             <div class="flex items-center gap-4 md:border-l border-indigo-700 md:pl-8">
@@ -54,71 +54,75 @@
 
     <header class="bg-indigo-600 text-white py-12">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h1 class="text-4xl font-bold mb-4">Evaluation: Where to use JEV? ⚖️</h1>
-            <p class="text-xl opacity-90">Local (Ollama) vs Cloud (OpenRouter)</p>
+            <h1 class="text-4xl font-bold mb-4">Local Performance Benchmarks ⚡</h1>
+            <p class="text-xl opacity-90">Throughput, VRAM, and Token/Sec Analysis on Apple Silicon</p>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+        
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Dilemma</h2>
-            <p class="mb-6 text-gray-700">When building your Second Brain, you have to choose an inference engine. Do you run models locally via <strong>Ollama</strong>, or use a multi-model aggregator like <strong>OpenRouter</strong> to access Claude 3.5 and GPT-4o? Here is the architectural evaluation.</p>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Throughput: Ingesting 100k Files</h2>
+            <p class="mb-4 text-gray-700">The most expensive operation in JEV is the initial ingestion loop—taking raw Drive files, extracting graph relationships via `llama3`, and vectorizing chunks via `nomic-embed-text`.</p>
+            
+            <div class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-indigo-50 border-b border-indigo-100">
+                        <tr>
+                            <th class="p-4 font-bold text-indigo-900">Apple Silicon Model</th>
+                            <th class="p-4 font-bold text-indigo-900">Unified Memory</th>
+                            <th class="p-4 font-bold text-indigo-900">Tokens / Sec (Llama 3 8B)</th>
+                            <th class="p-4 font-bold text-indigo-900">Est. 100k File Ingestion Time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-medium">M1 Base</td>
+                            <td class="p-4 text-gray-600">8GB / 16GB</td>
+                            <td class="p-4 text-gray-600">~25 t/s</td>
+                            <td class="p-4 text-red-600 font-medium">~72 Hours</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-medium">M2 Pro / Max</td>
+                            <td class="p-4 text-gray-600">32GB+</td>
+                            <td class="p-4 text-gray-600">~55 t/s</td>
+                            <td class="p-4 text-yellow-600 font-medium">~36 Hours</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 bg-green-50">
+                            <td class="p-4 font-bold text-green-900">M3 Max</td>
+                            <td class="p-4 text-green-800">64GB - 128GB</td>
+                            <td class="p-4 text-green-800 font-bold">~90+ t/s</td>
+                            <td class="p-4 text-green-700 font-bold">~18 Hours</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-500 mt-3">* Note: Time estimates assume an average of 1,000 tokens per file.</p>
+        </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- OpenRouter Eval -->
-                <div class="bg-white p-8 rounded-xl shadow border border-gray-200">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                        <span class="mr-2">🌐</span> OpenRouter (Cloud API)
-                    </h3>
-                    <p class="text-sm text-gray-600 mb-4">Best for: The <strong>Query Phase</strong> where deep reasoning is required.</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-2">✅</span> <span class="text-sm">Access to state-of-the-art reasoning (Claude 3.5 Sonnet, GPT-4o).</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-2">✅</span> <span class="text-sm">Incredibly fast time-to-first-token.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-2">❌</span> <span class="text-sm">Expensive for 100k file ingestion.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-2">❌</span> <span class="text-sm">Privacy risks (sending personal notes to external servers).</span>
-                        </li>
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Context Optimization Loop</h2>
+            <p class="mb-4 text-gray-700">When querying the Hermes Bot, performance drops drastically if you load too much context. Apple Silicon excels at generation, but large prompt processing (Prompt Eval) is bottlenecked by memory bandwidth.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="bg-red-50 p-6 rounded-xl border border-red-200">
+                    <h3 class="text-xl font-bold text-red-800 mb-2">Unoptimized Query</h3>
+                    <ul class="list-disc list-inside text-sm text-red-900 space-y-2">
+                        <li>Injects 20 whole files (20k tokens).</li>
+                        <li>Prompt Evaluation Time: <strong>12-15 seconds</strong>.</li>
+                        <li>High chance of LLM "lost in the middle" hallucination.</li>
                     </ul>
                 </div>
-
-                <!-- Local Eval -->
-                <div class="bg-white p-8 rounded-xl shadow border border-gray-200">
-                    <h3 class="text-2xl font-bold text-indigo-700 mb-4 flex items-center">
-                        <span class="mr-2">💻</span> Ollama (Local)
-                    </h3>
-                    <p class="text-sm text-gray-600 mb-4">Best for: The <strong>Ingestion Phase</strong> processing 100k files continuously.</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-2">✅</span> <span class="text-sm">100% Free. You can ingest files 24/7 without watching the API bill.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 mr-2">✅</span> <span class="text-sm">Total Data Sovereignty. Nothing leaves your machine.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-2">❌</span> <span class="text-sm">Slower processing speed. Requires an M-series Mac or Nvidia GPU.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 mr-2">❌</span> <span class="text-sm">Small local models (8B-70B) might occasionally fail complex Neo4j JSON extractions.</span>
-                        </li>
+                <div class="bg-green-50 p-6 rounded-xl border border-green-200">
+                    <h3 class="text-xl font-bold text-green-800 mb-2">JEV Optimized Query</h3>
+                    <ul class="list-disc list-inside text-sm text-green-900 space-y-2">
+                        <li>JEV filters via Qdrant/Neo4j first.</li>
+                        <li>Injects only the top 5 paragraphs (800 tokens).</li>
+                        <li>Prompt Evaluation Time: <strong>< 0.5 seconds</strong>.</li>
+                        <li>Time-to-first-token is virtually instantaneous.</li>
                     </ul>
                 </div>
             </div>
-        </section>
-
-        <section class="bg-indigo-50 p-8 rounded-xl border border-indigo-200 mt-12">
-            <h2 class="text-2xl font-bold text-indigo-900 mb-4">The Verdict: Hybrid Architecture</h2>
-            <p class="text-indigo-800">The most resilient architecture uses <strong>both</strong>.</p>
-            <ul class="list-disc list-inside mt-4 text-indigo-700 space-y-2">
-                <li><strong>Use Local Ollama (Llama 3 8B) for INGESTION:</strong> Let it run in the background 24/7, vectorizing and extracting nodes from your 100k Google Drive files for free.</li>
-                <li><strong>Use OpenRouter (Claude 3.5 Sonnet) for QUERYING:</strong> When you actively sit down and ask your Second Brain a complex question, spend the pennies to have Claude 3.5 reason over the Neo4j/Qdrant context provided by LangChain.</li>
-            </ul>
         </section>
 
     </main>

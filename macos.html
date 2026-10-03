@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Install & Run Ollama | JEV Second Brain</title>
+    <title>JEV macOS Installation | Second Brain</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
@@ -19,15 +19,16 @@
                 <span class="absolute right-3 top-1.5 text-gray-400">🔍</span>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-medium overflow-x-auto whitespace-nowrap">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-medium overflow-x-auto whitespace-nowrap scrollbar-hide">
             <!-- Theory -->
             <div class="flex items-center gap-4">
                 <span class="text-indigo-400 text-xs uppercase tracking-widest font-bold">Theory</span>
                 <a href="index.html" class="hover:text-white text-indigo-200 transition">🏠 Arch</a>
                 <a href="shines.html" class="hover:text-white text-indigo-200 transition">✨ Shines</a>
                 <a href="before-after.html" class="hover:text-white text-indigo-200 transition">🔄 Before/After</a>
-                <a href="eval.html" class="hover:text-white text-indigo-200 transition">⚖️ Eval</a>
                 <a href="cost.html" class="hover:text-white text-indigo-200 transition">💰 Cost</a>
+                <a href="eval.html" class="hover:text-white text-indigo-200 transition">⚖️ Eval</a>
+                <a href="performance.html" class="hover:text-white text-indigo-200 transition">⚡ Perf</a>
             </div>
             <!-- Setup -->
             <div class="flex items-center gap-4 md:border-l border-indigo-700 md:pl-8">
@@ -36,11 +37,15 @@
                 <a href="prompt.html" class="hover:text-white text-indigo-200 transition">🧠 Prompt</a>
                 <a href="async.html" class="hover:text-white text-indigo-200 transition">⚡ Async</a>
             </div>
-            <!-- Execution -->
+            <!-- Local Mac -->
             <div class="flex items-center gap-4 md:border-l border-indigo-700 md:pl-8">
-                <span class="text-indigo-400 text-xs uppercase tracking-widest font-bold">Execution</span>
+                <span class="text-indigo-400 text-xs uppercase tracking-widest font-bold">Local</span>
                 <a href="ollama.html" class="hover:text-white text-indigo-200 transition">🦙 Ollama</a>
-                <a href="ollama-install.html" class="hover:text-white text-indigo-200 transition">💻 Install</a>
+                <a href="macos.html" class="text-white border-b-2 border-indigo-200 transition">🍎 macOS Install</a>
+            </div>
+            <!-- Agents -->
+            <div class="flex items-center gap-4 md:border-l border-indigo-700 md:pl-8">
+                <span class="text-indigo-400 text-xs uppercase tracking-widest font-bold">Agents</span>
                 <a href="frontier.html" class="hover:text-white text-indigo-200 transition">🚀 Hybrid</a>
                 <a href="hermes.html" class="hover:text-white text-indigo-200 transition">🤖 Hermes</a>
             </div>
@@ -49,59 +54,45 @@
 
     <header class="bg-indigo-600 text-white py-12">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h1 class="text-4xl font-bold mb-4">Installing & Processing Locally 💻</h1>
-            <p class="text-xl opacity-90">Zero-cost ingestion for your 100k files</p>
+            <h1 class="text-4xl font-bold mb-4">JEV macOS Native Install 🍎</h1>
+            <p class="text-xl opacity-90">Harnessing Apple Silicon (M1/M2/M3) for your Second Brain</p>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Step 1: Install Ollama</h2>
-            <p class="mb-4 text-gray-700">Ollama allows you to run massive LLMs as background processes natively on macOS, Linux, and Windows.</p>
-            <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto shadow-inner">
-                # For macOS/Linux (via Homebrew/Curl) <br>
-                curl -fsSL https://ollama.com/install.sh | sh <br><br>
-                # Start the daemon <br>
-                ollama serve
-            </div>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Why macOS? (Metal Acceleration)</h2>
+            <p class="mb-4 text-gray-700">Apple Silicon's Unified Memory Architecture (UMA) is a game-changer for local LLMs. Unlike PCs that require separate VRAM on a dedicated GPU, a Mac with 64GB of Unified Memory can load massive 70B parameter models natively.</p>
         </section>
 
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Step 2: Pull the Models</h2>
-            <p class="mb-4 text-gray-700">You need two models: One for generating embeddings (Qdrant), and one for entity extraction (Neo4j).</p>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">1. Install Ollama via Homebrew</h2>
+            <p class="mb-4 text-gray-700">Open your macOS Terminal and run:</p>
+            <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto shadow-inner mb-4">
+                brew install ollama<br>
+                brew services start ollama
+            </div>
+            <p class="text-sm text-gray-600">This installs Ollama and ensures it runs as a background daemon whenever your Mac starts.</p>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">2. Pull the JEV Stack Models</h2>
+            <p class="mb-4 text-gray-700">JEV requires two distinct models: one for dense entity extraction, and one for hyper-fast vector embeddings.</p>
             <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto shadow-inner">
-                # Pull the extraction model (Llama-3 8B is excellent for extraction) <br>
-                ollama pull llama3 <br><br>
-                # Pull the embedding model (Nomic Embed Text) <br>
+                # For Neo4j Graph Extraction (The Brain)<br>
+                ollama pull llama3<br><br>
+                # For Qdrant Vectors (The Indexer)<br>
                 ollama pull nomic-embed-text
             </div>
         </section>
 
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Step 3: Setup the LangChain Processing Script</h2>
-            <p class="mb-4 text-gray-700">Write a python script that connects LangChain to your local Ollama port `localhost:11434`.</p>
-<pre class="bg-gray-100 p-4 rounded text-sm font-mono text-gray-800 shadow-sm overflow-x-auto border border-gray-200">
-import os
-from langchain_community.llms import Ollama
-from langchain_community.embeddings import OllamaEmbeddings
-
-# 1. Initialize Local LLM
-llm = Ollama(model="llama3", base_url="http://localhost:11434")
-
-# 2. Initialize Local Embeddings
-embeddings = OllamaEmbeddings(model="nomic-embed-text", base_url="http://localhost:11434")
-
-def process_file(file_content):
-    # This runs 100% locally on your machine
-    vector = embeddings.embed_query(file_content)
-    
-    extraction_prompt = f"Extract graph entities from:\n{file_content}"
-    graph_entities = llm.invoke(extraction_prompt)
-    
-    return vector, graph_entities
-</pre>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">3. Install the JEV Python Engine</h2>
+            <p class="mb-4 text-gray-700">Ensure you have Python 3.10+ installed. Then install the LangChain wrappers.</p>
+            <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm overflow-x-auto shadow-inner">
+                pip install langchain-community qdrant-client neo4j
+            </div>
         </section>
-
     </main>
 
     <!-- Footer -->

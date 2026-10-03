@@ -130,18 +130,23 @@ FOR doc, edge IN 1..2 OUTBOUND 'Projects/Phoenix' project_edges
             <div class="bg-gray-100 p-6 rounded-xl border border-gray-300 relative group">
                 <div class="absolute top-4 right-4 bg-white border border-gray-300 text-xs px-2 py-1 rounded shadow-sm text-gray-500 font-mono">Copy Prompt</div>
                 <pre class="whitespace-pre-wrap text-sm text-gray-800 font-mono">
-You are an expert DevOps engineer specializing in Fly.io deployments and Multi-Model RAG architectures.
+[Role]
+You are an expert DevOps engineer specializing in Fly.io edge deployments and Multi-Model RAG architectures.
 
-I need to deploy my Unified RAG Second Brain system to Fly.io. The architecture consists of two main components:
+[Task]
+Generate a complete Fly.io deployment pipeline for a Unified ArangoDB RAG Second Brain. The architecture consists of a persistent ArangoDB database (Graph + Vector) and a Python/LangChain FastAPI orchestration service.
 
-1. Database Layer: ArangoDB (acting natively as BOTH the Vector Store and the Graph Database). It must have a persistent volume attached to prevent data loss across restarts.
-2. Application Layer: A Python/LangChain orchestration service (FastAPI) that queries ArangoDB using AQL (ArangoDB Query Language) for combined graph-vector retrieval.
+[Constraints]
+1. ArangoDB Config: Provide a `fly.toml` with a `[mounts]` section for persistent volume storage to prevent data loss.
+2. App Config: Provide a `fly.toml` and a production-ready `Dockerfile` for the Python LangChain service.
+3. Secure Networking: You must configure Fly.io's private IPv6 network (`.flycast` / 6PN) to isolate the database from the public internet, mirroring the secure network topologies used by enterprise RAG frameworks.
+4. CLI Commands: Provide step-by-step `flyctl` commands to provision the volume, launch the apps, and inject database credentials via secrets.
+5. Local Ingestion via Ollama: Explicitly detail how a user running a local macOS machine with Ollama (Llama 3 & Nomic-Embed) can securely tunnel into the remote ArangoDB instance (e.g., using `flyctl proxy`) to process and ingest their local Markdown files over a secure connection.
 
-Please generate the following generic and reusable deployment assets:
-- A `fly.toml` for the ArangoDB instance, including the `[mounts]` section for persistent storage and internal `.flycast` private networking.
-- A `fly.toml` for the Python LangChain service, including environment variables linking it to the ArangoDB internal DNS.
-- A production-ready `Dockerfile` for the Python service.
-- Step-by-step `flyctl` CLI commands to provision the volumes, launch the apps, and securely pass the database credentials via secrets.
+[Rules]
+- Never expose the database ports to the public internet.
+- Ensure the Python service's environment variables strictly use the internal `.flycast` DNS for the database connection.
+- Keep all configuration files generic, reusable, and completely copy-paste ready.
 </pre>
             </div>
         </section>

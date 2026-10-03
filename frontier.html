@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Frontier Architecture | JEV Second Brain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <!-- Shared Navigation -->
+    <nav class="bg-indigo-800 text-white p-4 shadow-md sticky top-0 z-50 flex flex-col xl:flex-row justify-between items-center gap-4">
+        <div class="flex flex-wrap gap-4 font-medium justify-center items-center text-sm">
+            <a href="index.html" class="hover:text-indigo-300 transition">🏠 Arch</a>
+            <a href="before-after.html" class="hover:text-indigo-300 transition">🔄 Before/After</a>
+            <a href="prompt.html" class="hover:text-indigo-300 transition">🧠 Prompt</a>
+            <a href="ollama.html" class="hover:text-indigo-300 transition">🦙 Ollama Intro</a>
+            <a href="ollama-install.html" class="hover:text-indigo-300 transition">💻 Install Local</a>
+            <a href="async.html" class="hover:text-indigo-300 transition">⚡ Async</a>
+            <a href="cost.html" class="hover:text-indigo-300 transition">💰 Cost</a>
+            <a href="eval.html" class="hover:text-indigo-300 transition">⚖️ Eval</a>
+            <a href="frontier.html" class="hover:text-indigo-300 transition text-indigo-200 font-bold border-b-2 border-indigo-200">🚀 Hybrid Frontier</a>
+        </div>
+        <div class="relative">
+            <input type="search" placeholder="Search pages..." class="px-4 py-1.5 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm w-48 md:w-64">
+            <span class="absolute right-3 top-1.5 text-gray-400">🔍</span>
+        </div>
+    </nav>
+
+    <header class="bg-indigo-600 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4">The Hybrid Frontier Architecture 🚀</h1>
+            <p class="text-xl opacity-90">Using Local JEV alongside GPT-4o & Claude 3.5 Sonnet</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Best of Both Worlds</h2>
+            <p class="mb-4 text-gray-700">You don't have to choose between a 100% local stack and an expensive API stack. The <strong>Hybrid Frontier approach</strong> delegates tasks to the optimal engine based on compute requirements.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-200">
+                    <h3 class="text-xl font-bold text-indigo-800 mb-2">1. Local JEV (The Muscle)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-indigo-900">
+                        <li>Runs 24/7 in the background.</li>
+                        <li>Uses Ollama (Llama-3, Nomic-Embed).</li>
+                        <li>Embeds 100k files to Qdrant.</li>
+                        <li>Extracts Graph relationships to Neo4j.</li>
+                        <li><strong>Cost:</strong> $0.00</li>
+                    </ul>
+                </div>
+                <div class="bg-purple-50 p-6 rounded-xl border border-purple-200">
+                    <h3 class="text-xl font-bold text-purple-800 mb-2">2. Frontier Model (The Brain)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-purple-900">
+                        <li>Triggered only on human interaction.</li>
+                        <li>Uses GPT-4o or Claude 3.5 Sonnet.</li>
+                        <li>Reads the distilled context provided by JEV.</li>
+                        <li>Generates brilliant, deeply reasoned answers.</li>
+                        <li><strong>Cost:</strong> ~$0.02 per query.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">How LangChain Orchestrates It</h2>
+            <p class="mb-4 text-gray-700">LangChain serves as the router. It defines the local databases as "Tools" that the Frontier model can call upon.</p>
+            
+<pre class="bg-gray-900 text-green-400 p-6 rounded-xl text-sm font-mono shadow-inner overflow-x-auto">
+from langchain_openai import ChatOpenAI
+from langchain.agents import initialize_agent, Tool
+from local_jev import QdrantRetriever, Neo4jRetriever
+
+# 1. Initialize the Frontier Model (The Brain)
+frontier_llm = ChatOpenAI(model="gpt-4o", temperature=0.2)
+
+# 2. Define Local JEV as Tools (The Muscle)
+# These run locally against your pre-processed 100k files
+tools = [
+    Tool(
+        name="Semantic_Search",
+        func=QdrantRetriever.search,
+        description="Useful for finding conceptually similar notes from Drive."
+    ),
+    Tool(
+        name="Graph_Search",
+        func=Neo4jRetriever.get_subgraph,
+        description="Useful for finding connected projects, people, and concepts."
+    )
+]
+
+# 3. Create the LangChain Agent
+agent = initialize_agent(
+    tools, 
+    frontier_llm, 
+    agent="chat-conversational-react-description"
+)
+
+# 4. Execute Hybrid Query
+response = agent.run("What were my ideas on AI architectures in 2023?")
+print(response)
+</pre>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Why this is the ultimate setup</h2>
+            <ul class="space-y-4">
+                <li class="flex items-start">
+                    <span class="text-green-500 text-xl mr-3">✓</span>
+                    <div>
+                        <strong class="block text-gray-800">Zero Context Window Limits</strong>
+                        <span class="text-gray-600 text-sm">GPT-4o doesn't read 100k files. It asks the local Qdrant/Neo4j tools to fetch the 5 exact files it needs.</span>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 text-xl mr-3">✓</span>
+                    <div>
+                        <strong class="block text-gray-800">Maximum Privacy</strong>
+                        <span class="text-gray-600 text-sm">Your entire Drive isn't sent to OpenAI. Only the specifically retrieved, hyper-relevant paragraphs are sent in the final prompt.</span>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 text-xl mr-3">✓</span>
+                    <div>
+                        <strong class="block text-gray-800">Elite Reasoning</strong>
+                        <span class="text-gray-600 text-sm">You get the logic and synthesis capabilities of the world's smartest models without paying the ingestion tax.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12 flex flex-col items-center gap-2">
+        <p>&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
+        <a href="https://rifaterdemsahin.github.io/jev/" target="_blank" class="text-indigo-300 hover:text-white underline transition">Live on GitHub Pages</a>
+    </footer>
+
+</body>
+</html>

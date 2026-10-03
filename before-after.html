@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Before & After JEV | Second Brain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <!-- Navigation -->
+    <nav class="bg-indigo-700 text-white p-4 shadow-md">
+        <div class="max-w-5xl mx-auto flex gap-6 font-medium">
+            <a href="index.html" class="hover:text-indigo-200 transition">Overview</a>
+            <a href="before-after.html" class="hover:text-indigo-200 transition">Before & After</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4">The Evolution of the Second Brain</h1>
+            <p class="text-xl opacity-90">What happens when you add JEV to 100,000 files?</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-16">
+
+        <!-- Before vs After -->
+        <section>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Before JEV -->
+                <div class="bg-red-50 p-8 rounded-xl shadow-md border border-red-200">
+                    <h2 class="text-2xl font-bold text-red-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Before JEV
+                    </h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="bg-red-200 text-red-800 rounded-full h-6 w-6 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">1</span>
+                            <div>
+                                <strong class="block text-red-900">Information Black Hole</strong>
+                                <span class="text-red-700 text-sm">Notes go into Google Drive but are rarely found again. Keyword search is too rigid.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-red-200 text-red-800 rounded-full h-6 w-6 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">2</span>
+                            <div>
+                                <strong class="block text-red-900">LLM Hallucinations</strong>
+                                <span class="text-red-700 text-sm">Pasting partial notes into ChatGPT leads to made-up connections because the LLM lacks the full 100k-file context.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-red-200 text-red-800 rounded-full h-6 w-6 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">3</span>
+                            <div>
+                                <strong class="block text-red-900">Isolated Thoughts</strong>
+                                <span class="text-red-700 text-sm">A note about "Marketing" and a note about "Psychology" never interact, missing key insights.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-red-200 text-red-800 rounded-full h-6 w-6 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">4</span>
+                            <div>
+                                <strong class="block text-red-900">No Graph Awareness</strong>
+                                <span class="text-red-700 text-sm">Cannot answer questions like "Who was the person connected to the Alpha project in 2021?"</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- After JEV -->
+                <div class="bg-green-50 p-8 rounded-xl shadow-md border border-green-200">
+                    <h2 class="text-2xl font-bold text-green-800 mb-6 flex items-center">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        After JEV
+                    </h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="bg-green-200 text-green-800 rounded-full h-6 w-6 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">1</span>
+                            <div>
+                                <strong class="block text-green-900">Semantic Retrieval (Qdrant)</strong>
+                                <span class="text-green-700 text-sm">Search by concept, not just keywords. Instant retrieval of highly relevant paragraphs out of 100k files.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-green-200 text-green-800 rounded-full h-6 w-6 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">2</span>
+                            <div>
+                                <strong class="block text-green-900">Grounded LLM Responses</strong>
+                                <span class="text-green-700 text-sm">LangChain dynamically feeds the exact 5 relevant context nodes to the LLM. Zero hallucination.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-green-200 text-green-800 rounded-full h-6 w-6 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">3</span>
+                            <div>
+                                <strong class="block text-green-900">Automated Synthesis</strong>
+                                <span class="text-green-700 text-sm">JEV actively cross-pollinates ideas by running similarity scores on disparate folders overnight.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-green-200 text-green-800 rounded-full h-6 w-6 flex items-center justify-center font-bold mr-3 mt-1 flex-shrink-0">4</span>
+                            <div>
+                                <strong class="block text-green-900">Graph Relationships (Neo4j)</strong>
+                                <span class="text-green-700 text-sm">Understands complex multi-hop links between authors, dates, projects, and concepts automatically.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12 flex flex-col items-center gap-2">
+        <p>&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
+        <a href="https://rifaterdemsahin.github.io/jev/" target="_blank" class="text-indigo-300 hover:text-white underline transition">Live on GitHub Pages</a>
+    </footer>
+
+</body>
+</html>

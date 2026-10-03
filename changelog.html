@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Async Processing with JEV | Scalability</title>
+    <title>Our Journey | JEV Second Brain</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
@@ -36,7 +36,7 @@
                 <a href="prepare.html" class="hover:text-white text-indigo-200 transition">🛠️ Prep</a>
                 <a href="prompt.html" class="hover:text-white text-indigo-200 transition">🧠 Prompt</a>
                 <a href="async.html" class="hover:text-white text-indigo-200 transition">⚡ Async</a>
-                <a href="changelog.html" class="hover:text-white text-indigo-200 transition font-bold border-b-2 border-indigo-200">📝 Journey</a>
+                <a href="changelog.html" class="text-white border-b-2 border-indigo-200 transition">📝 Journey</a>
             </div>
             <!-- Local Mac -->
             <div class="flex items-center gap-4 md:border-l border-indigo-700 md:pl-8">
@@ -53,50 +53,63 @@
         </div>
     </nav>
 
-    <!-- Header -->
     <header class="bg-indigo-600 text-white py-12">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h1 class="text-4xl font-bold mb-4">Improving Async Processing ⚡</h1>
-            <p class="text-xl opacity-90">How to handle 100k files without blocking the UI</p>
+            <h1 class="text-4xl font-bold mb-4">Our Build Journey 📝</h1>
+            <p class="text-xl opacity-90">What we built to document the ultimate 100k-file Second Brain</p>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
-
+        
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">First Principles: Event-Driven Non-Blocking UX</h2>
-            <p class="mb-4"><strong>Rationale:</strong> Processing a new file involves parsing text, generating vector embeddings (Qdrant), extracting graph entities via LLM (Neo4j), and syncing states. If done synchronously, the user interface will freeze for minutes. For 100k files, it takes days.</p>
-            <p><strong>The Solution:</strong> Implement an Event-Driven, Asynchronous Queue Architecture (e.g., Celery, RabbitMQ, or Redis/BullMQ) to decouple ingestion from the user experience.</p>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Problem We Solved</h2>
+            <p class="text-gray-700 mb-6">Managing 100,000 files in a Second Brain breaks standard LLMs. They suffer from context limits, high costs, and hallucinations. Over this session, we built a comprehensive, 12-page documentation site outlining how to solve this using <strong>JEV</strong> (Integrating Google Drive, Qdrant Vectors, Neo4j Graphs, and LangChain).</p>
         </section>
 
-        <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Async Architecture Pipeline</h2>
-            
+        <section class="space-y-8">
             <div class="relative border-l-4 border-indigo-400 pl-6 space-y-8 ml-4">
                 
+                <!-- Phase 1 -->
                 <div>
                     <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
-                    <h3 class="text-xl font-bold text-indigo-900">1. Webhook / File Watcher (Instant)</h3>
-                    <p class="text-gray-700">A new file is dropped into Google Drive. A webhook instantly fires to JEV, adding a <code>{file_id, status: pending}</code> to the Redis Queue. The UI immediately shows "File Queued" and remains responsive.</p>
+                    <h3 class="text-xl font-bold text-indigo-900">Phase 1: Foundation & The Problem</h3>
+                    <p class="text-gray-700 mt-2"><strong>`index.html` & `before-after.html`</strong>: We established the core architecture (Separation of Concerns). We decoupled storage (Drive), semantic meaning (Qdrant), relationships (Neo4j), and reasoning (LangChain). We created visual comparisons showing the chaos of unstructured notes versus a Graph-Enhanced RAG system.</p>
                 </div>
 
+                <!-- Phase 2 -->
                 <div>
                     <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
-                    <h3 class="text-xl font-bold text-indigo-900">2. Background Worker: Parsing (Async)</h3>
-                    <p class="text-gray-700">A background worker picks up the job, downloads the file, and runs OCR/Text Extraction without blocking the main server.</p>
+                    <h3 class="text-xl font-bold text-indigo-900">Phase 2: Ingestion & Asynchronous Scaling</h3>
+                    <p class="text-gray-700 mt-2"><strong>`prompt.html` & `async.html`</strong>: We recognized that ingesting 100k files synchronously crashes systems. We documented an Event-Driven background queue system. We also wrote the exact "System Directive Prompt" used to force the LLM to output structured Cypher relationships rather than just summarizing text.</p>
                 </div>
 
+                <!-- Phase 3 -->
                 <div>
                     <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
-                    <h3 class="text-xl font-bold text-indigo-900">3. Background Worker: Embedding & Graph (Async)</h3>
-                    <p class="text-gray-700">The worker sends text to the embedding model (or Ollama), pushes vectors to Qdrant, and executes LangChain to merge nodes into Neo4j. This is heavily parallelized across worker nodes.</p>
+                    <h3 class="text-xl font-bold text-indigo-900">Phase 3: The Cost Crisis & Local Execution</h3>
+                    <p class="text-gray-700 mt-2"><strong>`cost.html`, `eval.html`, & `ollama.html`</strong>: Processing 100 Million tokens via API costs hundreds of dollars. We introduced local <strong>Ollama</strong> as the zero-cost ingestion engine. We built a framework evaluating when to use OpenRouter (Cloud) vs Local execution, determining that "Local Ingestion + Cloud Querying" is the optimal hybrid path.</p>
                 </div>
 
+                <!-- Phase 4 -->
                 <div>
                     <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
-                    <h3 class="text-xl font-bold text-indigo-900">4. WebSocket Push to Client (Instant)</h3>
-                    <p class="text-gray-700">Once the pipeline finishes, the worker publishes a completion event. The JEV frontend receives a WebSocket message, updating the UI to say "Brain Updated: 1 New Concept Mapped" natively.</p>
+                    <h3 class="text-xl font-bold text-indigo-900">Phase 4: Agents & The User Interface</h3>
+                    <p class="text-gray-700 mt-2"><strong>`frontier.html` & `hermes.html`</strong>: We designed the user-facing layer. We introduced <em>Hermes Bot</em> as the chat interface, and detailed how LangChain orchestrates the "Hybrid Frontier" architecture by treating local Qdrant and Neo4j databases as <em>Tools</em> for GPT-4o or Claude 3.5 Sonnet to call upon.</p>
+                </div>
+
+                <!-- Phase 5 -->
+                <div>
+                    <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
+                    <h3 class="text-xl font-bold text-indigo-900">Phase 5: macOS Optimization & Performance</h3>
+                    <p class="text-gray-700 mt-2"><strong>`macos.html`, `performance.html`, & `shines.html`</strong>: We verified local Apple Silicon capabilities. We wrote native installation scripts for `llama3` and `nomic-embed-text`. We documented benchmarks showing how an M3 Max processes ~100k files in 18 hours, and how JEV drops query prompt evaluation times from 15 seconds to under 0.5 seconds.</p>
+                </div>
+
+                <!-- Phase 6 -->
+                <div>
+                    <div class="absolute w-4 h-4 bg-indigo-600 rounded-full -left-[10px] mt-1.5 border-2 border-white"></div>
+                    <h3 class="text-xl font-bold text-indigo-900">Phase 6: The Great Redesign</h3>
+                    <p class="text-gray-700 mt-2"><strong>Global Nav & Footer</strong>: As the documentation grew to 12 pages, the top menu became cluttered. We used Python to globally refactor the navigation into logical groups (Theory, Setup, Local, Agents) and added a pulsing "Deployment Status" footer for a professional dashboard feel.</p>
                 </div>
 
             </div>

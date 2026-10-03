@@ -36,3 +36,28 @@ JEV connects modern data infrastructure into a cohesive pipeline:
 
 ---
 *Created for the JEV AI orchestration project.*
+
+## 📚 Documentation Site Map (What We Built)
+
+We have built a comprehensive 12-page documentation site to explain the JEV architecture. Here is the structure:
+
+### Theory
+* **`index.html` (Arch):** The core First Principles and visual architecture of separating Drive, Qdrant, Neo4j, and LangChain.
+* **`shines.html`:** Why Graph+Vector beats standard vector databases (Multi-Hop Reasoning, Zero Hallucinations).
+* **`before-after.html`:** The chaos of a 100k-file Google Drive vs. the structure of JEV.
+* **`cost.html`:** Cost breakdown of Cloud vs Local ingestion.
+* **`eval.html`:** The framework for choosing between OpenRouter and Local Ollama.
+* **`performance.html`:** Apple Silicon benchmarks and context optimization metrics.
+
+### Setup
+* **`prepare.html`:** Structuring local folders and feeding JEV reference documentation.
+* **`prompt.html`:** The exact System Directive prompt used to force LLMs to output Neo4j relationships.
+* **`async.html`:** Event-driven background queueing so the UI doesn't freeze on massive ingests.
+* **`changelog.html`:** A detailed journey of how this architecture and site was constructed.
+
+### Execution & Agents
+* **`ollama.html` / `macos.html`:** Native local execution instructions for Apple Silicon.
+* **`frontier.html`:** How to use LangChain Tools to let GPT-4o reason over your local, free ingestion data.
+* **`hermes.html`:** The conversational bot UI and real-time synchronous memory processing.
+
+*Run a local server (`python3 -m http.server`) to view the site.*

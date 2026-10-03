@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where JEV Shines | JEV Second Brain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <!-- Shared Navigation -->
+    <nav class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center border-b border-indigo-800 gap-4">
+            <div class="font-bold text-xl tracking-wide text-indigo-100 flex items-center gap-2">
+                <span class="text-2xl">🧠</span> JEV <span class="font-light opacity-70 text-sm hidden sm:inline">Second Brain</span>
+            </div>
+            <div class="relative w-full sm:w-auto">
+                <input type="search" placeholder="Search pages..." class="w-full sm:w-64 px-4 py-1.5 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm shadow-inner">
+                <span class="absolute right-3 top-1.5 text-gray-400">🔍</span>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row gap-4 md:gap-8 text-sm font-medium overflow-x-auto whitespace-nowrap">
+            <!-- Theory -->
+            <div class="flex items-center gap-4">
+                <span class="text-indigo-400 text-xs uppercase tracking-widest font-bold">Theory</span>
+                <a href="index.html" class="hover:text-white text-indigo-200 transition">🏠 Arch</a>
+                <a href="shines.html" class="text-white border-b-2 border-indigo-200 transition">✨ Shines</a>
+                <a href="before-after.html" class="hover:text-white text-indigo-200 transition">🔄 Before/After</a>
+                <a href="eval.html" class="hover:text-white text-indigo-200 transition">⚖️ Eval</a>
+                <a href="cost.html" class="hover:text-white text-indigo-200 transition">💰 Cost</a>
+            </div>
+            <!-- Setup -->
+            <div class="flex items-center gap-4 md:border-l border-indigo-700 md:pl-8">
+                <span class="text-indigo-400 text-xs uppercase tracking-widest font-bold">Setup</span>
+                <a href="prepare.html" class="hover:text-white text-indigo-200 transition">🛠️ Prep</a>
+                <a href="prompt.html" class="hover:text-white text-indigo-200 transition">🧠 Prompt</a>
+                <a href="async.html" class="hover:text-white text-indigo-200 transition">⚡ Async</a>
+            </div>
+            <!-- Execution -->
+            <div class="flex items-center gap-4 md:border-l border-indigo-700 md:pl-8">
+                <span class="text-indigo-400 text-xs uppercase tracking-widest font-bold">Execution</span>
+                <a href="ollama.html" class="hover:text-white text-indigo-200 transition">🦙 Ollama</a>
+                <a href="ollama-install.html" class="hover:text-white text-indigo-200 transition">💻 Install</a>
+                <a href="frontier.html" class="hover:text-white text-indigo-200 transition">🚀 Hybrid</a>
+                <a href="hermes.html" class="hover:text-white text-indigo-200 transition">🤖 Hermes</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-indigo-600 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="text-4xl font-bold mb-4">Where JEV Shines ✨</h1>
+            <p class="text-xl opacity-90">Supercharging the Hermes Bot with Perfect Context</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+        
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Sweet Spot: Where JEV Outperforms Everything</h2>
+            <p class="mb-4 text-gray-700">Standard Retrieval-Augmented Generation (RAG) fails when documents are highly interconnected. If you ask a standard vector DB about "Project Phoenix", it will just give you files with the word "Phoenix". It misses the context.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-indigo-200 border-t-4 border-t-indigo-500">
+                    <h3 class="font-bold text-lg mb-2 text-indigo-900">Multi-Hop Reasoning</h3>
+                    <p class="text-sm text-gray-600">JEV doesn't just read documents; it traverses relationships. It can answer: <em>"Find the notes from the engineer who worked on Phoenix, but specifically what they said about scaling."</em></p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-purple-200 border-t-4 border-t-purple-500">
+                    <h3 class="font-bold text-lg mb-2 text-purple-900">Zero Hallucinations</h3>
+                    <p class="text-sm text-gray-600">Because JEV enforces strict deterministic graph retrieval (Neo4j) before semantics (Qdrant), the LLM is mathematically restricted from making up false connections.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-200 border-t-4 border-t-teal-500">
+                    <h3 class="font-bold text-lg mb-2 text-teal-900">Infinite Scaling</h3>
+                    <p class="text-sm text-gray-600">Whether you have 1,000 files or 100,000 files in Drive, JEV always filters it down to the top 5 exact paragraphs. Speed remains constant regardless of vault size.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Integration: Making the Hermes Bot Unstoppable</h2>
+            <p class="mb-6 text-gray-700">When you deploy <strong>Hermes Bot</strong> as your conversational UI, JEV acts as its backend memory cortex. Here is how they integrate to create the ultimate Second Brain experience.</p>
+            
+            <div class="space-y-6">
+                <!-- Point 1 -->
+                <div class="flex items-start">
+                    <div class="bg-indigo-100 text-indigo-700 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg shrink-0 mt-1">1</div>
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-800">Persistent Long-Term Memory</h3>
+                        <p class="text-gray-600">Standard chatbots forget everything when you close the tab. By hooking Hermes into JEV, every chat session is analyzed and pushed to Qdrant/Neo4j. Months later, Hermes can say, <em>"Based on our conversation in March, you preferred React over Vue for this type of project."</em></p>
+                    </div>
+                </div>
+
+                <!-- Point 2 -->
+                <div class="flex items-start">
+                    <div class="bg-indigo-100 text-indigo-700 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg shrink-0 mt-1">2</div>
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-800">Context-Aware Interruption</h3>
+                        <p class="text-gray-600">If you ask Hermes, "What should I focus on today?", Hermes asks LangChain to query the Neo4j graph for `[Status: In Progress]`. It cross-references this with recent notes in Drive and gives you a perfectly tailored morning brief.</p>
+                    </div>
+                </div>
+
+                <!-- Point 3 -->
+                <div class="flex items-start">
+                    <div class="bg-indigo-100 text-indigo-700 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg shrink-0 mt-1">3</div>
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-800">Deterministic Self-Correction</h3>
+                        <p class="text-gray-600">If Hermes gets something wrong during a chat, you simply say <em>"No, John moved to the Alpha project, not Phoenix."</em> LangChain executes a Cypher query on Neo4j to sever the John-Phoenix edge and create a John-Alpha edge. The mistake is permanently eradicated from the Brain.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 text-center mt-12 flex flex-col items-center gap-6 border-t border-gray-800">
+        <div class="flex items-center gap-3 bg-gray-800 px-5 py-2.5 rounded-full shadow-inner border border-gray-700">
+            <span class="flex h-3 w-3 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            <span class="text-sm font-mono text-green-400 tracking-wide">Deployment Status: All Systems Operational</span>
+        </div>
+        <p class="text-sm">&copy; 2026 JEV Project. Building the ultimate Second Brain.</p>
+        <a href="https://rifaterdemsahin.github.io/jev/" target="_blank" class="text-indigo-400 hover:text-white underline transition text-sm">View Live on GitHub Pages</a>
+    </footer>
+
+</body>
+</html>

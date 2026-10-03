@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hybrid Frontier Architecture | JEV Second Brain</title>
+    <title>Use Case: Multi-Cluster Release Roadmaps | JEV</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
@@ -53,112 +53,95 @@
             <!-- Use Cases -->
             <div class="flex items-center gap-4 md:border-l border-indigo-700 md:pl-8">
                 <span class="text-indigo-400 text-xs uppercase tracking-widest font-bold">Cases</span>
-                <a href="usecase-multicluster.html" class="hover:text-white text-indigo-200 transition">🌐 Multi-Cluster</a>
+                <a href="usecase-multicluster.html" class="text-white border-b-2 border-indigo-200 transition">🌐 Multi-Cluster</a>
             </div>
         </div>
     </nav>
 
     <header class="bg-indigo-600 text-white py-12">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h1 class="text-4xl font-bold mb-4">The Hybrid Frontier Architecture 🚀</h1>
-            <p class="text-xl opacity-90">Using Local JEV alongside GPT-4o & Claude 3.5 Sonnet</p>
+            <h1 class="text-4xl font-bold mb-4">Use Case: Multi-Cluster Releases 🌐</h1>
+            <p class="text-xl opacity-90">Building an operational roadmap for complex deployments using JEV</p>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+        
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Best of Both Worlds</h2>
-            <p class="mb-4 text-gray-700">You don't have to choose between a 100% local stack and an expensive API stack. The <strong>Hybrid Frontier approach</strong> delegates tasks to the optimal engine based on compute requirements.</p>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Problem</h2>
+            <p class="mb-4 text-gray-700">Executing a release across a multi-cluster Kubernetes environment (e.g., `dev-eu`, `staging-eu`, `prod-us-east`) is an operational nightmare. Runbooks, YAML manifests, post-mortems from past failures, and Slack thread summaries are scattered across thousands of Markdown files in your Second Brain.</p>
+            <p class="text-gray-700">A simple keyword search fails because it lacks chronological sequence and dependency awareness.</p>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">How JEV Generates the Roadmap</h2>
+            <p class="mb-6 text-gray-700">When you ask your <strong>Hermes Bot</strong> to help you implement the release, JEV orchestrates the perfect context window by combining Qdrant and Neo4j.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-                <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-200">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-2">1. Local JEV (The Muscle)</h3>
-                    <ul class="list-disc list-inside space-y-2 text-sm text-indigo-900">
-                        <li>Runs 24/7 in the background.</li>
-                        <li>Uses Ollama (Llama-3, Nomic-Embed).</li>
-                        <li>Embeds 100k files to Qdrant.</li>
-                        <li>Extracts Graph relationships to Neo4j.</li>
-                        <li><strong>Cost:</strong> $0.00</li>
-                    </ul>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 border-l-4 border-blue-500">
+                    <h3 class="text-xl font-bold text-blue-800 mb-2">1. Graph Extraction (Neo4j)</h3>
+                    <p class="text-sm text-gray-600">JEV identifies the explicit dependencies. It finds that `payment-service-v2` <strong>REQUIRES</strong> `redis-cluster-v5`, and that `redis-cluster-v5` <strong>FAILED_ON</strong> `prod-us-east` last month. This guarantees Hermes knows the infrastructure constraints.</p>
                 </div>
-                <div class="bg-purple-50 p-6 rounded-xl border border-purple-200">
-                    <h3 class="text-xl font-bold text-purple-800 mb-2">2. Frontier Model (The Brain)</h3>
-                    <ul class="list-disc list-inside space-y-2 text-sm text-purple-900">
-                        <li>Triggered only on human interaction.</li>
-                        <li>Uses GPT-4o or Claude 3.5 Sonnet.</li>
-                        <li>Reads the distilled context provided by JEV.</li>
-                        <li>Generates brilliant, deeply reasoned answers.</li>
-                        <li><strong>Cost:</strong> ~$0.02 per query.</li>
-                    </ul>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 border-l-4 border-purple-500">
+                    <h3 class="text-xl font-bold text-purple-800 mb-2">2. Semantic Post-Mortems (Qdrant)</h3>
+                    <p class="text-sm text-gray-600">JEV fetches the actual paragraphs from your incident reports describing <em>why</em> the Redis cluster failed last month (e.g., "OOM kill due to bad resource limits"), ensuring Hermes includes a mitigation step.</p>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">How LangChain Orchestrates It</h2>
-            <p class="mb-4 text-gray-700">LangChain serves as the router. It defines the local databases as "Tools" that the Frontier model can call upon.</p>
+            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">The Practical Example</h2>
             
-<pre class="bg-gray-900 text-green-400 p-6 rounded-xl text-sm font-mono shadow-inner overflow-x-auto">
-from langchain_openai import ChatOpenAI
-from langchain.agents import initialize_agent, Tool
-from local_jev import QdrantRetriever, Neo4jRetriever
+            <div class="space-y-6">
+                <!-- User Prompt -->
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">You prompt the Hermes Bot:</h4>
+                    <div class="bg-gray-100 p-4 rounded-lg font-mono text-sm border border-gray-300">
+                        "Generate a hands-on roadmap to release payment-service-v2 across all clusters. Review our past operational procedures and incident post-mortems to ensure we don't repeat the same mistakes."
+                    </div>
+                </div>
 
-# 1. Initialize the Frontier Model (The Brain)
-frontier_llm = ChatOpenAI(model="gpt-4o", temperature=0.2)
+                <!-- JEV Action -->
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">What JEV does in the background:</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-1 ml-2">
+                        <li><strong>Query Neo4j:</strong> <code class="bg-gray-200 px-1 rounded">MATCH (p:Project {name: 'payment-service-v2'})-[:DEPENDS_ON]->(dep) RETURN dep</code></li>
+                        <li><strong>Query Qdrant:</strong> <code class="bg-gray-200 px-1 rounded">search(query="payment-service release failures out of memory", limit=3)</code></li>
+                    </ul>
+                </div>
 
-# 2. Define Local JEV as Tools (The Muscle)
-# These run locally against your pre-processed 100k files
-tools = [
-    Tool(
-        name="Semantic_Search",
-        func=QdrantRetriever.search,
-        description="Useful for finding conceptually similar notes from Drive."
-    ),
-    Tool(
-        name="Graph_Search",
-        func=Neo4jRetriever.get_subgraph,
-        description="Useful for finding connected projects, people, and concepts."
-    )
-]
+                <!-- Hermes Output -->
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-2">The Generated Roadmap (by Hermes via GPT-4o):</h4>
+                    <div class="bg-gray-900 text-green-400 p-6 rounded-xl text-sm font-mono shadow-inner overflow-x-auto border border-gray-800">
+<pre>
+# Multi-Cluster Release Roadmap: payment-service-v2
 
-# 3. Create the LangChain Agent
-agent = initialize_agent(
-    tools, 
-    frontier_llm, 
-    agent="chat-conversational-react-description"
-)
+⚠️ CRITICAL CONTEXT LOADED FROM JEV:
+- Dependency detected: `redis-cluster-v5` must be upgraded first.
+- Past Incident (Oct 2025): Redis OOM killed on `prod-us-east` due to default limits.
 
-# 4. Execute Hybrid Query
-response = agent.run("What were my ideas on AI architectures in 2023?")
-print(response)
+## Phase 1: Pre-Flight (Dev & Staging)
+1. kubectl config use-context dev-eu
+2. Apply Redis Resource Limits (Fixing the Oct 2025 bug):
+   `kubectl apply -f redis-limits-patch.yaml`
+3. Deploy payment-service-v2 to dev-eu.
+4. Run integration suite `make test-integration`.
+
+## Phase 2: Production Rollout (EU First)
+1. kubectl config use-context prod-eu
+2. Verify Redis cluster health: `kubectl get pods -n redis -l app=redis-cluster-v5`
+3. Initiate Canary Deployment (20% traffic) via ArgoCD.
+4. Monitor Datadog dashboard for error spikes for 15 minutes.
+
+## Phase 3: High-Risk Rollout (US-East)
+1. kubectl config use-context prod-us-east
+2. Scale up Redis nodes prior to deploy (Mitigating high load seen in US-East).
+3. Complete full ArgoCD sync for payment-service-v2.
 </pre>
-        </section>
-
-        <section>
-            <h2 class="text-3xl font-semibold mb-6 border-b pb-2 border-gray-200">Why this is the ultimate setup</h2>
-            <ul class="space-y-4">
-                <li class="flex items-start">
-                    <span class="text-green-500 text-xl mr-3">✓</span>
-                    <div>
-                        <strong class="block text-gray-800">Zero Context Window Limits</strong>
-                        <span class="text-gray-600 text-sm">GPT-4o doesn't read 100k files. It asks the local Qdrant/Neo4j tools to fetch the 5 exact files it needs.</span>
                     </div>
-                </li>
-                <li class="flex items-start">
-                    <span class="text-green-500 text-xl mr-3">✓</span>
-                    <div>
-                        <strong class="block text-gray-800">Maximum Privacy</strong>
-                        <span class="text-gray-600 text-sm">Your entire Drive isn't sent to OpenAI. Only the specifically retrieved, hyper-relevant paragraphs are sent in the final prompt.</span>
-                    </div>
-                </li>
-                <li class="flex items-start">
-                    <span class="text-green-500 text-xl mr-3">✓</span>
-                    <div>
-                        <strong class="block text-gray-800">Elite Reasoning</strong>
-                        <span class="text-gray-600 text-sm">You get the logic and synthesis capabilities of the world's smartest models without paying the ingestion tax.</span>
-                    </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </section>
 
     </main>
